@@ -75,6 +75,20 @@ class LoginViewController: UIViewController {
             PFUser.logInWithUsername(inBackground: usernameField.text!, password: passwordField.text!) { (user: PFUser?, error: Error?) in
                 
                 if error != nil{
+                    let alertController = UIAlertController(title: "Error", message: "Incorrect Username/Password.", preferredStyle: .alert)
+                    
+                    
+                    // create an OK action
+                    let OKAction = UIAlertAction(title: "OK", style: .default) { (action) in
+                        // handle response here.
+                    }
+                    // add the OK action to the alert controller
+                    alertController.addAction(OKAction)
+                    
+                    self.present(alertController, animated: true)
+                    {
+                        // optional code for what happens after the alert controller has finished presenting
+                    }
                     
                 }
                 else{

@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import Parse
 
 class ChatCell: UITableViewCell {
-
+    @IBOutlet weak var usernameLabel: UILabel!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    var message: PFObject! {
+        didSet{
+            
+            if let user = message["user"] as? PFUser {
+                // User found! update username label with username
+                usernameLabel.text = user.username
+            } else {
+                // No user found, set default username
+                usernameLabel.text = "🤖"
+            }
+            messageLabel.text = message.value(forKey: "text") as? String
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
